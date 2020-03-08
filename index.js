@@ -6,7 +6,8 @@ import pathIsAbsolute from 'path-is-absolute';
 const cwd = process.cwd();
 
 const isGit = (altPath = cwd) => {
-  const thisPath = pathIsAbsolute(altPath) ? altPath : path.join(cwd, altPath);
+  let thisPath = pathIsAbsolute(altPath) ? altPath : path.join(cwd, altPath);
+  thisPath = thisPath.replace(/(\s)/g, '\\ ');
 
   try {
     if (platform() === 'win32') {
@@ -23,8 +24,9 @@ const isGit = (altPath = cwd) => {
 
 const currentBranch = (altPath = cwd) => {
   let stdout;
+  const thisPath = altPath.replace(/(\s)/g, '\\ ');
 
-  if (!isGit(altPath)) {
+  if (!isGit(thisPath)) {
     return false;
   }
 
@@ -32,9 +34,9 @@ const currentBranch = (altPath = cwd) => {
     let cmd = '';
 
     if (platform() === 'win32') {
-      cmd = `pushd ${altPath || cwd} & git branch | findstr \\*`;
+      cmd = `pushd ${thisPath} & git branch | findstr \\*`;
     } else {
-      cmd = `(cd ${altPath || cwd} ; git branch | grep \\*)`;
+      cmd = `(cd ${thisPath} ; git branch | grep \\*)`;
     }
 
     stdout = execa.shellSync(cmd).stdout;
