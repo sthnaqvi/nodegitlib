@@ -1,0 +1,33 @@
+{
+  "name": "nodegitlib",
+  "version": "1.0.0",
+  "description": "A tool to play with git within node project",
+  "main": "index.js",
+  "scripts": {
+    "pretest": "npm run lint",
+    "test": "nyc ava",
+    "lint": "eslint index.js",
+    "coveralls": "nyc report --reporter=text-lcov | coveralls",
+    "prepublish": "npm run babel",
+    "babel": "babel index.js -o build.js",
+    "prepush": "npm test"
+  },
+  "author": "Sayed Tauseef Naqvi <tauseef.naqvi786@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "execa": "^0.6.1",
+    "path-is-absolute": "^2.0.0"
+  },
+  "devDependencies": {
+    "ava": "^3.5.0",
+    "babel-cli": "^6.26.0",
+    "babel-plugin-add-module-exports": "^1.0.2",
+    "babel-preset-env": "^1.7.0",
+    "coveralls": "^3.0.9",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.20.1",
+    "husky": "^4.2.3",
+    "nyc": "^15.0.0"
+  }
+}
