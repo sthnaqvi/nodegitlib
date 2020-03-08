@@ -1,8 +1,8 @@
 {
   "name": "nodegitlib",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A tool to play with git within node project",
-  "main": "index.js",
+  "main": "build.js",
   "scripts": {
     "pretest": "npm run lint",
     "test": "nyc ava",
@@ -12,8 +12,39 @@
     "babel": "babel index.js -o build.js",
     "prepush": "npm test"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sthnaqvi/nodegitlib.git"
+  },
+  "keywords": [
+    "is",
+    "git",
+    "added",
+    "HEAD",
+    "repo",
+    "is-git",
+    "exists",
+    "current branch",
+    "git branch",
+    "current",
+    "branch"
+  ],
   "author": "Sayed Tauseef Naqvi <tauseef.naqvi786@gmail.com>",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sthnaqvi/nodegitlib/issues"
+  },
+  "ava": {
+    "require": "babel-register",
+    "babel": "inherit"
+  },
+  "nyc": {
+    "exclude": [
+      "build.js",
+      "test.js"
+    ]
+  },
+  "homepage": "https://github.com/sthnaqvi/nodegitlib#readme",
   "dependencies": {
     "execa": "^0.6.1",
     "path-is-absolute": "^2.0.0"

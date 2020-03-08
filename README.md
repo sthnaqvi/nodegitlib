@@ -24,8 +24,8 @@ const git = require('nodegitlib');
 git.isGit(); // true or false of current working directory
 git.isGit('any/git/repo'); // true or false
 
-git.currentBranch(); // false or branch name of current working directory
-git.currentBranch('any/git/repo'); // false or branch name
+git.currentBranch(); // false or git current branch name of current working directory
+git.currentBranch('any/git/repo'); // false or git current branch name
 ```
 
 ## LICENSE
