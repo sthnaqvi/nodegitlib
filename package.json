@@ -50,7 +50,7 @@
     "path-is-absolute": "^2.0.0"
   },
   "devDependencies": {
-    "ava": "^3.5.0",
+    "ava": "^5.2.0",
     "babel-cli": "^6.26.0",
     "babel-plugin-add-module-exports": "^1.0.2",
     "babel-preset-env": "^1.7.0",
