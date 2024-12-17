@@ -1,7 +1,7 @@
-import execa from 'execa';
-import { platform } from 'os';
-import path from 'path';
-import pathIsAbsolute from 'path-is-absolute';
+const execa = require('execa');
+const { platform } = require('os');
+const path = require('path');
+const pathIsAbsolute = require('path-is-absolute');
 
 const cwd = process.cwd();
 
@@ -11,9 +11,12 @@ const isGit = (altPath = cwd) => {
 
   try {
     if (platform() === 'win32') {
-      execa.shellSync(`pushd ${thisPath} & git status`);
+      execa.sync(`pushd ${thisPath} & git status`, { shell: true });
     } else {
-      execa.shellSync(`(cd ${thisPath} ; ([ -d .git ] && echo .git) || git rev-parse --git-dir 2> /dev/null)`);
+      execa.sync(
+        `(cd ${thisPath} ; ([ -d .git ] && echo .git) || git rev-parse --git-dir 2> /dev/null)`,
+        { shell: true }
+      );
     }
 
     return true;
@@ -39,7 +42,7 @@ const currentBranch = (altPath = cwd) => {
       cmd = `(cd ${thisPath} ; git branch | grep \\*)`;
     }
 
-    stdout = execa.shellSync(cmd).stdout;
+    stdout = execa.sync(cmd, { shell: true }).stdout;
   } catch (e) {
     return false;
   }
@@ -49,9 +52,7 @@ const currentBranch = (altPath = cwd) => {
   return branchName;
 };
 
-const git = {
+module.exports = {
   isGit,
   currentBranch,
 };
-
-export default git;
